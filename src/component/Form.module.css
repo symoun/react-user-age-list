@@ -1,0 +1,28 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.form label {
+  margin-bottom: 0.3rem;
+}
+
+.form button {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.3rem;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 7px;
+  background-color: #9333ea;
+  color: #e9d5ff;
+  transition: all 0.3s;
+}
+
+.form button:active,
+.form button:hover {
+  background-color: #f0abfc;
+  transform: scale(1.2);
+  color: red;
+}

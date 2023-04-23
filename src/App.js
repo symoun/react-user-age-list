@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Form from "./component/Form";
+import UserList from "./component/UserList";
+import InvalidInput from "./component/InvalidInput";
+import styles from "./App.module.css";
 
-function App() {
+export default function App() {
+  const [list, setList] = useState([
+    { name: "symoun", age: "27", id: Math.round(Math.random() * 1000) },
+    { name: "christine", age: "21", id: Math.round(Math.random() * 1000) },
+  ]);
+  function addToList(item) {
+    setList(() => [item, ...list]);
+  }
+  function deleteHandler(id) {
+    for (const item in list) {
+      if (list[item].id === Number(id)) {
+        const newList = [
+          ...list.slice(0, item),
+          ...list.slice(Number(item) + 1),
+        ];
+        setList(newList);
+      }
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.app}>
+      <InvalidInput />
+      <Form onSubmit={addToList} />
+      <UserList list={list} onDelete={deleteHandler} />
     </div>
   );
 }
-
-export default App;
