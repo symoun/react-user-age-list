@@ -13,7 +13,10 @@ export default function Form(props) {
   }
   function submitHandler(e) {
     e.preventDefault();
-    if (!userName || age < 1) return;
+    if (!userName || !age || age < 1) {
+      props.onValid();
+      return;
+    }
     props.onSubmit({
       name: userName,
       age: age,

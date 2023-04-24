@@ -5,6 +5,7 @@ import InvalidInput from "./component/InvalidInput";
 import styles from "./App.module.css";
 
 export default function App() {
+  const [isValidInput, setIsValidInput] = useState(true);
   const [list, setList] = useState([
     { name: "symoun", age: "27", id: Math.round(Math.random() * 1000) },
     { name: "christine", age: "21", id: Math.round(Math.random() * 1000) },
@@ -23,11 +24,14 @@ export default function App() {
       }
     }
   }
+  function validHandler() {
+    setIsValidInput((prevState) => !prevState);
+  }
   return (
     <div className={styles.app}>
-      <InvalidInput />
-      <Form onSubmit={addToList} />
+      <Form onSubmit={addToList} onValid={validHandler} />
       <UserList list={list} onDelete={deleteHandler} />
+      {!isValidInput ? <InvalidInput onValid={validHandler} /> : ""}
     </div>
   );
 }
